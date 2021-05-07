@@ -10,10 +10,13 @@ export const TriviaContainerStyled = styled.div`
   position: relative;
   position: sticky;
   top: 0;
-  width: 60%;
+  width: 100%;
   overflow-x: hidden;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  align-items: center
+  align-items: center;
+  @media (min-width: 1281px) {
+    width: 60%;
+  }
 `;
