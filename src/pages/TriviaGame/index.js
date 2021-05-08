@@ -16,9 +16,9 @@ import {
 //Hooks
 import { useQuestion } from "../../hooks/useQuestion";
 //Context
-import ContextSelected from "../../context/answerContext";
+import contextSelected from "../../context/answerContext";
 function TriviaGame() {
-  const { SelectedAnswerProvider } = ContextSelected;
+  const { SelectedAnswerProvider } = contextSelected;
   const [selected, setSelected] = useState("");
   const { getQuestion, answers, question, loading } = useQuestion();
   const optionSelected = (option) => {
