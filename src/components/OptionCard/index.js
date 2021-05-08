@@ -1,22 +1,27 @@
-import React from "react";
-
-import useAnswer from "./hooks/useAnswer";
+import React, { useContext } from "react";
+import "./styles.css";
 import { CardContainer, AnswerContainerStyled, AnswerStyled } from "./styles";
 
-function OptionCard({ children, onClick, correct, current, selected }) {
-  const { animation, selectAnswer, CorrectAnimation } = useAnswer({
-    correctAnswer: correct,
-  });
+import SelectedContext from "../../context/answerContext";
+function OptionCard({ children, onClick, correct, current }) {
+  const { SelectedAnswerContext } = SelectedContext;
 
-  console.log({ children, onClick, correct, current, selected });
+  const selected = useContext(SelectedAnswerContext);
+
   return (
     <CardContainer>
       <AnswerContainerStyled
         onClick={() => {
           onClick();
-          selectAnswer({ selectAnswer: current });
         }}
-        animation={selected === current ? animation : ""}
+        className={`answer-card 
+        ${
+          (correct && selected) || current === selected
+            ? "answer-card--correct"
+            : ""
+        }
+        ${!correct && current === selected ? "answer-card--incorrect" : ""}
+        `}
       >
         <AnswerStyled>
           <span style={{ fontWeight: "bold" }}>{current}:</span>

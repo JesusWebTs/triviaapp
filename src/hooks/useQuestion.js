@@ -12,6 +12,11 @@ export const useQuestion = () => {
   const [answers, setAnswers] = useState([]);
   const [loading, setLoading] = useState(false);
 
+  useEffect(() => {
+    console.log(answers);
+    return () => {};
+  }, [answers]);
+
   const getQuestion = async () => {
     setLoading(true);
     conn
@@ -27,7 +32,6 @@ export const useQuestion = () => {
         _answers.push({ answer: res.correct_answer, correct: true });
         const sortedAnswer = sortRandomAnswerArray(_answers);
         setAnswers(sortedAnswer);
-        console.log(answers);
       })
       .catch((err) => {
         setLoading(false);
@@ -39,6 +43,6 @@ export const useQuestion = () => {
     getQuestion,
     question,
     answers,
-    loading
+    loading,
   };
 };

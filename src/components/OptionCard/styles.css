@@ -1,0 +1,29 @@
+.answer-card {
+  animation-duration: 0.5s;
+  animation-iteration-count: 4;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+.answer-card--correct {
+  animation-name: CorrectAnswer;
+}
+.answer-card--incorrect {
+  animation-name: IncorrectAnswer;
+}
+
+@keyframes CorrectAnswer {
+  0% {
+    background-color: white;
+  }
+  100% {
+    background-color: #00ff00;
+  }
+}
+@keyframes IncorrectAnswer {
+  0% {
+    background-color: white;
+  }
+  100% {
+    background-color: #ff0000;
+  }
+}

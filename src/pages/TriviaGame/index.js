@@ -15,8 +15,10 @@ import {
 } from "./styles";
 //Hooks
 import { useQuestion } from "../../hooks/useQuestion";
-
+//Context
+import ContextSelected from "../../context/answerContext";
 function TriviaGame() {
+  const { SelectedAnswerProvider } = ContextSelected;
   const [selected, setSelected] = useState("");
   const { getQuestion, answers, question, loading } = useQuestion();
   const optionSelected = (option) => {
@@ -24,15 +26,20 @@ function TriviaGame() {
     setTimeout(() => {
       getQuestion();
     }, 2000);
+    return selected;
   };
 
   const time = 10;
-
   useEffect(() => {
     setSelected("");
     getQuestion();
     return () => {};
   }, []);
+
+  useEffect(() => {
+    setSelected("");
+    return () => {};
+  }, [question]);
 
   return (
     <TriviaContainerStyled>
@@ -40,30 +47,31 @@ function TriviaGame() {
         <Spiner />
       ) : (
         <>
-          <ScoreVarTimeContainerStyled>
-            <TimeLine time={time}></TimeLine>
-          </ScoreVarTimeContainerStyled>
-          <TimeCounterContainerStyled>
-            <TimeCounter time={time}></TimeCounter>
-          </TimeCounterContainerStyled>
-          <QuestionConttainerStyled>
-            <QuestionCard>{question}</QuestionCard>
-          </QuestionConttainerStyled>
-          <AnswerContainerStyled>
-            {answers.map(({ correct, answer, option }) => (
-              <OptionCard
-                key={option}
-                correct={correct}
-                current={option}
-                selected={selected}
-                onClick={() => {
-                  optionSelected(option);
-                }}
-              >
-                {answer}
-              </OptionCard>
-            ))}
-          </AnswerContainerStyled>
+          <SelectedAnswerProvider value={selected}>
+            <ScoreVarTimeContainerStyled>
+              <TimeLine time={time}></TimeLine>
+            </ScoreVarTimeContainerStyled>
+            <TimeCounterContainerStyled>
+              <TimeCounter time={time}></TimeCounter>
+            </TimeCounterContainerStyled>
+            <QuestionConttainerStyled>
+              <QuestionCard>{question}</QuestionCard>
+            </QuestionConttainerStyled>
+            <AnswerContainerStyled>
+              {answers.map(({ correct, answer, option }) => (
+                <OptionCard
+                  key={option}
+                  correct={correct}
+                  current={option}
+                  onClick={() => {
+                    optionSelected(option);
+                  }}
+                >
+                  {answer}
+                </OptionCard>
+              ))}
+            </AnswerContainerStyled>
+          </SelectedAnswerProvider>
         </>
       )}
     </TriviaContainerStyled>

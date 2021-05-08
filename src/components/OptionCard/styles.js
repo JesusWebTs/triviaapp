@@ -38,9 +38,6 @@ export const AnswerContainerStyled = styled.button`
   &:hover {
     background-color: #0000ff33;
   }
-  ${({ animation }) => animation}
-  ${({ animation }) => animation}
-  
 `;
 export const AnswerStyled = styled.p`
   display: flex;
