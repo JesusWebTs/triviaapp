@@ -20,6 +20,7 @@ export const NeedleStyle = styled.img`
   animation-iteration-count: 1;
   animation-timing-function: linear;
   animation-fill-mode: forwards;
+  animation-play-state: ${({ selected }) => (selected ? "paused" : "running")};
 
   @keyframes NeedleRotate {
     0% {

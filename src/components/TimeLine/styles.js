@@ -36,7 +36,7 @@ export const ScoreVarTimeStyled = styled.div`
     animation-iteration-count: 1;
     animation-timing-function: linear;
     animation-fill-mode: forwards;
-
+    animation-play-state: ${({ selected }) => (selected ? "paused" : "running")};
     @keyframes TimeLine {
       0% {
         clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);

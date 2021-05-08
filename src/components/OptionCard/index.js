@@ -5,7 +5,6 @@ import { CardContainer, AnswerContainerStyled, AnswerStyled } from "./styles";
 import SelectedContext from "../../context/answerContext";
 function OptionCard({ children, onClick, correct, current }) {
   const { SelectedAnswerContext } = SelectedContext;
-
   const selected = useContext(SelectedAnswerContext);
 
   return (
