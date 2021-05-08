@@ -24,12 +24,15 @@ export const useQuestion = () => {
       .then((res) => {
         setLoading(false);
         setQuestionData(res);
-        setQuestion(res.question);
+        setQuestion(res.question.replace(/&quot;/g, '"'));
         const _answers = res.incorrect_answers.map((answer) => ({
-          answer,
+          answer: answer.replace(/&quot;/g, '"'),
           correct: false,
         }));
-        _answers.push({ answer: res.correct_answer, correct: true });
+        _answers.push({
+          answer: res.correct_answer.replace(/&quot;/g, '"'),
+          correct: true,
+        });
         const sortedAnswer = sortRandomAnswerArray(_answers);
         setAnswers(sortedAnswer);
       })
