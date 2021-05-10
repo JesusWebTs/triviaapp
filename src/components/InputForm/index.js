@@ -38,6 +38,7 @@ function InputForm({ direction = "column", onClick }) {
               autoComplete="off"
               value={formState.name}
               onChange={(e) => {
+                validName();
                 return changeField({
                   type: "CHANGE_NAME",
                   payload: e.target.value,
@@ -64,6 +65,7 @@ function InputForm({ direction = "column", onClick }) {
               return false;
             } else {
               onClick(formState.name);
+    
             }
           }}
           value="Let's Play!"
