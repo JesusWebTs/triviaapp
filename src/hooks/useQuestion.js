@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import { sortRandomAnswerArray } from "../helpers";
+import { sortRandomAnswerArray, textFormatter } from "../helpers";
 
+//Services
 import { ApiQuestions } from "../services/apiQuestions";
 
 const conn = new ApiQuestions({
@@ -16,6 +17,10 @@ export const useQuestion = () => {
     console.log(answers);
     return () => {};
   }, [answers]);
+  useEffect(() => {
+    console.log(question);
+    return () => {};
+  }, [question]);
 
   const getQuestion = async () => {
     setLoading(true);
@@ -24,13 +29,13 @@ export const useQuestion = () => {
       .then((res) => {
         setLoading(false);
         setQuestionData(res);
-        setQuestion(res.question.replace(/&quot;/g, '"'));
+        setQuestion(textFormatter(res.question));
         const _answers = res.incorrect_answers.map((answer) => ({
-          answer: answer.replace(/&quot;/g, '"'),
+          answer: textFormatter(answer),
           correct: false,
         }));
         _answers.push({
-          answer: res.correct_answer.replace(/&quot;/g, '"'),
+          answer: textFormatter(res.correct_answer),
           correct: true,
         });
         const sortedAnswer = sortRandomAnswerArray(_answers);

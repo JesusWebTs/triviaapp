@@ -7,3 +7,13 @@ export const sortRandomAnswerArray = (arr) => {
     return { ...el, option: option[index] };
   });
 };
+export const textFormatter = (text) => {
+  if (text.includes("&quot;")) {
+    text = text.replace(/&quot;/g, '"');
+  }
+  if (text.includes("&#039;")) {
+    text = text.replace(/&#039;/g, "'");  
+  }
+
+  return text;
+};

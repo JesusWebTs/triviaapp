@@ -1,10 +1,18 @@
-import './App.css';
-import TriviaGame from './pages/TriviaGame';
+import React from "react";
+import { Route } from "wouter";
+import "./App.css";
+import TriviaGame from "./pages/TriviaGame";
+import TriviaMain from "./pages/TriviaMain";
 
 function App() {
   return (
     <div className="App">
-    <TriviaGame />
+      <Route path="/game/:name">
+        <TriviaGame />
+      </Route>
+      <Route path="/">
+        <TriviaMain />
+      </Route>
     </div>
   );
 }
