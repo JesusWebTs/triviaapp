@@ -30,10 +30,10 @@ function TriviaMain() {
       <InputForm
         onClick={(name) => {
           storage.setItem("name", name);
+          storage.setItem("uuid", uuid());
           createPlayer({
             name: storage.getItem("name"),
             uuid: storage.getItem("uuid"),
-            uuid: uuid(),
           }).then(() => {
             goPlayGame(name);
           });
