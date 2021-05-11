@@ -6,9 +6,11 @@ import { TriviaContainerStyled } from "../styles";
 //Hooks
 import usePlayers from "../../hooks/usePlayers";
 import { useState } from "react";
+import { useLocation } from "wouter";
 function ScoreGame() {
   const { getPlayersScores, players } = usePlayers();
   const [_, setPlayers] = useState([]);
+  const [__, setLocation] = useLocation();
   useEffect(() => {
     getPlayersScores()
       .then((players) => {
@@ -19,7 +21,7 @@ function ScoreGame() {
   }, []);
   return (
     <TriviaContainerStyled>
-      <ScoreTable data={players}></ScoreTable>
+      <ScoreTable data={players} onClick={() => setLocation("/")}></ScoreTable>
     </TriviaContainerStyled>
   );
 }

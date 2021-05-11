@@ -27,6 +27,7 @@ export const ScoreItemStyled = styled.li`
 export const ScoreItemContainerStyled = styled.ol`
   overflow-y: scroll;
   max-height: 90%;
+  text-align: center;
 `;
 
 export const Top3Styled = styled.img`
@@ -36,4 +37,20 @@ export const Top3Styled = styled.img`
   bottom: 0;
   margin: auto 15px;
   width: 50px;
+`;
+
+export const PlayAgain = styled.button`
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 30px;
+  margin-top: 25px;
+  width: 140px;
+  height: 50px;
+  border-radius: 5px;
+  color: white;
+  background-color: black;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 30;
 `;

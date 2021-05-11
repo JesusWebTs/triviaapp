@@ -5,6 +5,7 @@ import {
   ScoreItemStyled,
   ScoreTableStyled,
   Top3Styled,
+  PlayAgain,
 } from "./styles";
 //Assets
 import Star1 from "../../assets/images/star1.svg";
@@ -14,7 +15,7 @@ import Star3 from "../../assets/images/star3.svg";
 import { ascendentSort } from "../../helpers";
 import { useState } from "react";
 
-function ScoreTable({ data }) {
+function ScoreTable({ data, onClick }) {
   const [players, setPlayers] = useState([]);
 
   useEffect(() => {
@@ -24,20 +25,23 @@ function ScoreTable({ data }) {
   }, [data]);
 
   return (
-    <ScoreTableStyled>
-      <h1>Scores</h1>
-      <ScoreItemContainerStyled>
-        {players.map((player, index) => (
-          <ScoreItemStyled key={player.uuid}>
-            {index === 0 ? <Top3Styled src={Star3} /> : null}
-            {index === 1 ? <Top3Styled src={Star2} /> : null}
-            {index === 2 ? <Top3Styled src={Star1} /> : null}
-            <h2>{player.name}</h2>
-            <h3>Score: {player.maxScore}</h3>
-          </ScoreItemStyled>
-        ))}
-      </ScoreItemContainerStyled>
-    </ScoreTableStyled>
+    <>
+      <ScoreTableStyled>
+        <h1>Scores</h1>
+        <ScoreItemContainerStyled>
+          {players.map((player, index) => (
+            <ScoreItemStyled key={player.uuid}>
+              {index === 0 ? <Top3Styled src={Star3} /> : null}
+              {index === 1 ? <Top3Styled src={Star2} /> : null}
+              {index === 2 ? <Top3Styled src={Star1} /> : null}
+              <h2>{player.name}</h2>
+              <h3>Score: {player.maxScore}</h3>
+            </ScoreItemStyled>
+          ))}
+        </ScoreItemContainerStyled>
+        <PlayAgain onClick={onClick}>Play Again</PlayAgain>
+      </ScoreTableStyled>
+    </>
   );
 }
 
