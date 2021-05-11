@@ -35,6 +35,8 @@ export const QuestionContainerStyled = styled.div`
   width: 100%;
   height: 100%;
   border-radius: 40px;
+  padding-left: 15px;
+  padding-right: 15px;
 `;
 export const QuestionStyled = styled.p`
   display: flex;

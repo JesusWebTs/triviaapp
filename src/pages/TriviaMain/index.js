@@ -8,33 +8,23 @@ import { TriviaContainerStyled } from "../styles";
 //Hook
 import usePlayers from "../../hooks/usePlayers";
 function TriviaMain() {
-  const {
-    createPlayer,
-    getPlayerInfo,
-    getPlayersScores,
-    player,
-    players,
-    updatePlayer,
-  } = usePlayers();
+  const { createPlayer } = usePlayers();
   const [_, setLocation] = useLocation();
   const storage = window.localStorage;
 
   const goPlayGame = (name) => {
-    setLocation(`/game/${storage.getItem("name")}`);
+    setLocation(`game/${name.toLowerCase()}`);
   };
+
   useEffect(() => {
-    if (!storage.getItem("uuid")) {
-      storage.setItem("uuid", uuid());
-    }
-    if (
-      !!storage.getItem("name") &&
-      storage.getItem("name") !== "null" &&
-      storage.getItem("name") !== "undefined"
-    ) {
-      goPlayGame();
+    const invalidNames = ["", "undefined", "null"];
+    const name = storage.getItem("name");
+    if (!invalidNames.includes(name)) {
+      goPlayGame(name);
     }
     return () => {};
   }, []);
+
   return (
     <TriviaContainerStyled>
       <InputForm
@@ -43,6 +33,7 @@ function TriviaMain() {
           createPlayer({
             name: storage.getItem("name"),
             uuid: storage.getItem("uuid"),
+            uuid: uuid(),
           }).then(() => {
             goPlayGame(name);
           });

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useLayoutEffect } from "react";
 //Components
 import TimeLine from "../../components/TimeLine";
 import OptionCard from "../../components/OptionCard";
@@ -17,11 +17,17 @@ import {
 import { useQuestion } from "../../hooks/useQuestion";
 //Context
 import contextSelected from "../../context/answerContext";
+import { useLocation } from "wouter";
 function TriviaGame() {
+  const [_, setLocation] = useLocation();
+  let timeOut;
+  let baseTime = 10;
   const { SelectedAnswerProvider } = contextSelected;
   const [selected, setSelected] = useState("");
+  const [time, setTime] = useState(baseTime);
   const { getQuestion, answers, question, loading } = useQuestion();
   const optionSelected = (option) => {
+    clearTimeout(timeOut);
     setSelected(option);
     setTimeout(() => {
       getQuestion();
@@ -29,17 +35,36 @@ function TriviaGame() {
     return selected;
   };
 
-  const time = 10;
+  const gameOver = () => {
+    setLocation("/score");
+  };
+
   useEffect(() => {
+    if (time <= -2) gameOver();
+    return () => {};
+  }, [time]);
+
+  useEffect(() => {
+    setTime(baseTime);
+    setSelected("");
+    return () => {};
+  }, [question]);
+
+  useEffect(() => {
+    setInterval(() => {
+      if (!selected) {
+        setTime((prevState) => prevState - 1);
+      }
+    }, 1000);
     setSelected("");
     getQuestion();
     return () => {};
   }, []);
 
   useEffect(() => {
-    setSelected("");
+    console.log(selected);
     return () => {};
-  }, [question]);
+  }, [selected]);
 
   return (
     <TriviaContainerStyled>
@@ -49,10 +74,10 @@ function TriviaGame() {
         <>
           <SelectedAnswerProvider value={selected}>
             <ScoreVarTimeContainerStyled>
-              <TimeLine time={time}></TimeLine>
+              <TimeLine time={baseTime}></TimeLine>
             </ScoreVarTimeContainerStyled>
             <TimeCounterContainerStyled>
-              <TimeCounter time={time}></TimeCounter>
+              <TimeCounter time={baseTime}></TimeCounter>
             </TimeCounterContainerStyled>
             <QuestionConttainerStyled>
               <QuestionCard>{question}</QuestionCard>
@@ -64,6 +89,7 @@ function TriviaGame() {
                   correct={correct}
                   current={option}
                   onClick={() => {
+                    if (!correct) setTimeout(() => gameOver(), 2000);
                     optionSelected(option);
                   }}
                 >

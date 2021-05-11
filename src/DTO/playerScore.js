@@ -1,9 +1,9 @@
 class PlayerScore {
   name;
-  score;
-  constructor({ name, score }) {
+  maxScore;
+  constructor({ name, maxScore }) {
     this.name = name;
-    this.score = score;
+    this.maxScore = maxScore;
   }
 }
 export default PlayerScore;

@@ -65,7 +65,6 @@ function InputForm({ direction = "column", onClick }) {
               return false;
             } else {
               onClick(formState.name);
-    
             }
           }}
           value="Let's Play!"

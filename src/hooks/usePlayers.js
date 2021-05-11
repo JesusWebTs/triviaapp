@@ -3,10 +3,14 @@ import ApiConnect from "../services/apiFirebase";
 import PlayerScore from "../DTO/playerScore";
 const usePlayers = () => {
   const [player, setPlayer] = useState({});
-  const [players, setPlayers] = useState({});
+  const [players, setPlayers] = useState([]);
   const createPlayer = async (data) => {
-    const player = { ...data, maxScore: 0, scores: [] };
-    ApiConnect.post(player)
+    const player = {
+      ...data,
+      maxScore: Math.floor(Math.random() * 100),
+      scores: [],
+    };
+    return ApiConnect.post(player)
       .then(() => {
         setPlayer(player);
       })
@@ -15,7 +19,7 @@ const usePlayers = () => {
       });
   };
   const getPlayerInfo = async (uuid) => {
-    ApiConnect.getOne(uuid)
+    return ApiConnect.getOne(uuid)
       .then((player) => {
         setPlayer(player);
       })
@@ -24,7 +28,7 @@ const usePlayers = () => {
       });
   };
   const updatePlayer = (uuid, data) => {
-    ApiConnect.update(uuid, data)
+    return ApiConnect.update(uuid, data)
       .then((writeResult) => {
         setPlayer((prevState) => ({ ...prevState, ...data }));
       })
@@ -33,9 +37,10 @@ const usePlayers = () => {
       });
   };
   const getPlayersScores = async () => {
-    ApiConnect.getAll()
-      .then((players) => {
-        setPlayers(players.map((player) => new PlayerScore(player)));
+    return ApiConnect.getAll()
+      .then((_players) => {
+        setPlayers(_players);
+        return players;
       })
       .catch((err) => {
         console.log(err);

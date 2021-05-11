@@ -12,8 +12,18 @@ export const textFormatter = (text) => {
     text = text.replace(/&quot;/g, '"');
   }
   if (text.includes("&#039;")) {
-    text = text.replace(/&#039;/g, "'");  
+    text = text.replace(/&#039;/g, "'");
   }
-
   return text;
+};
+export const ascendentSort = (arr) => {
+  return arr.sort((a, b) => {
+    if (a.maxScore < b.maxScore) {
+      return 1;
+    }
+    if (a.maxScore > b.maxScore) {
+      return -1;
+    }
+    return 0;
+  });
 };
