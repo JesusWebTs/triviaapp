@@ -6,7 +6,7 @@ import { TriviaGame, ScoreGame, TriviaMain } from "./pages";
 function App() {
   return (
     <div className="App">
-      <Route path="/">
+      <Route>
         <TriviaMain />
       </Route>
       <Route path="/game/:name">
