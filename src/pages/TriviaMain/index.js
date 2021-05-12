@@ -9,7 +9,7 @@ import { TriviaContainerStyled } from "../styles";
 import usePlayers from "../../hooks/usePlayers";
 function TriviaMain() {
   const { createPlayer } = usePlayers();
- 
+
   const history = useHistory();
   const storage = window.localStorage;
 
@@ -17,27 +17,22 @@ function TriviaMain() {
     history.push(`game/${name.toLowerCase()}`);
   };
 
-  /* useEffect(() => {
-    const invalidNames = ["", "undefined", "null"];
-    const name = storage.getItem("name");
-    if (!invalidNames.includes(name)) {
-      goPlayGame(name);
-    }
-    return () => {};
-  }, []); */
-
   return (
     <TriviaContainerStyled>
       <InputForm
         onClick={(name) => {
           storage.setItem("name", name);
-          storage.setItem("uuid", uuid());
-          createPlayer({
-            name: storage.getItem("name"),
-            uuid: storage.getItem("uuid"),
-          }).then(() => {
+          if (!storage.getItem("uuid")) {
+            storage.setItem("uuid", uuid());
+            createPlayer({
+              name: storage.getItem("name"),
+              uuid: storage.getItem("uuid"),
+            }).then(() => {
+              goPlayGame(name);
+            });
+          } else {
             goPlayGame(name);
-          });
+          }
         }}
       ></InputForm>
     </TriviaContainerStyled>

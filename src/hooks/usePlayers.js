@@ -7,7 +7,7 @@ const usePlayers = () => {
   const createPlayer = async (data) => {
     const player = {
       ...data,
-      maxScore: Math.floor(Math.random() * 100),
+      maxScore: 0,
       scores: [],
     };
     return ApiConnect.post(player)
