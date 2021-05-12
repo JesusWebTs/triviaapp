@@ -8,7 +8,7 @@ function App() {
     <div className="App">
       <Router>
         <Switch>
-          <Route path="/game/:name">
+          <Route exact path="/game/:name">
             <TriviaGame />
           </Route>
           <Route path="/score">
