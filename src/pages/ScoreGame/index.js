@@ -6,11 +6,11 @@ import { TriviaContainerStyled } from "../styles";
 //Hooks
 import usePlayers from "../../hooks/usePlayers";
 import { useState } from "react";
-import { useLocation } from "wouter";
+import { useHistory, useLocation } from "react-router-dom";
 function ScoreGame() {
   const { getPlayersScores, players } = usePlayers();
   const [_, setPlayers] = useState([]);
-  const [__, setLocation] = useLocation();
+  const history = useHistory();
   useEffect(() => {
     getPlayersScores()
       .then((players) => {
@@ -21,7 +21,7 @@ function ScoreGame() {
   }, []);
   return (
     <TriviaContainerStyled>
-      <ScoreTable data={players} onClick={() => setLocation("/")}></ScoreTable>
+      <ScoreTable data={players} onClick={() => history.push("/")}></ScoreTable>
     </TriviaContainerStyled>
   );
 }

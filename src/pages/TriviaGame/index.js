@@ -17,9 +17,9 @@ import {
 import { useQuestion } from "../../hooks/useQuestion";
 //Context
 import contextSelected from "../../context/answerContext";
-import { useLocation } from "wouter";
+import { useHistory } from "react-router-dom";
 function TriviaGame() {
-  const [_, setLocation] = useLocation();
+  const history = useHistory();
   let timeOut;
   let baseTime = 10;
   const { SelectedAnswerProvider } = contextSelected;
@@ -36,7 +36,7 @@ function TriviaGame() {
   };
 
   const gameOver = () => {
-    setLocation("/score");
+    history.push("/score");
   };
 
   useEffect(() => {

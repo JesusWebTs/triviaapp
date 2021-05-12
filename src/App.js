@@ -1,20 +1,24 @@
 import React from "react";
-import { Route } from "wouter";
+import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import "./App.css";
 import { TriviaGame, ScoreGame, TriviaMain } from "./pages";
 
 function App() {
   return (
     <div className="App">
-      <Route>
-        <TriviaMain />
-      </Route>
-      <Route path="/game/:name">
-        <TriviaGame />
-      </Route>
-      <Route path="/score">
-        <ScoreGame />
-      </Route>
+      <Router>
+        <Switch>
+          <Route path="/game/:name">
+            <TriviaGame />
+          </Route>
+          <Route path="/score">
+            <ScoreGame />
+          </Route>
+          <Route path="/">
+            <TriviaMain />
+          </Route>
+        </Switch>
+      </Router>
     </div>
   );
 }

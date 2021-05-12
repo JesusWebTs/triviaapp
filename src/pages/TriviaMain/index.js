@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { v4 as uuid } from "uuid";
-import { useLocation } from "wouter";
+import { useHistory, useLocation } from "react-router-dom";
 //Component
 import InputForm from "../../components/InputForm";
 //Styles
@@ -9,11 +9,12 @@ import { TriviaContainerStyled } from "../styles";
 import usePlayers from "../../hooks/usePlayers";
 function TriviaMain() {
   const { createPlayer } = usePlayers();
-  const [_, setLocation] = useLocation();
+ 
+  const history = useHistory();
   const storage = window.localStorage;
 
   const goPlayGame = (name) => {
-    setLocation(`game/${name.toLowerCase()}`);
+    history.push(`game/${name.toLowerCase()}`);
   };
 
   useEffect(() => {
