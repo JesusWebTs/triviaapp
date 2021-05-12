@@ -13,6 +13,7 @@ function ScoreGame() {
   const [_, setPlayers] = useState([]);
   const history = useHistory();
   useEffect(() => {
+    if (!storage.getItem("uuid")) history.push("/");
     getPlayersScores()
       .then((players) => {
         setPlayers(players);

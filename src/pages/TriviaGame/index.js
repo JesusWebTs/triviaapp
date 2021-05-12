@@ -18,6 +18,8 @@ import { useQuestion } from "../../hooks/useQuestion";
 //Context
 import contextSelected from "../../context/answerContext";
 import { useHistory } from "react-router-dom";
+
+const storage = window.localStorage;
 function TriviaGame() {
   const history = useHistory();
   let timeOut;
@@ -40,17 +42,7 @@ function TriviaGame() {
   };
 
   useEffect(() => {
-    if (time <= -2) gameOver();
-    return () => {};
-  }, [time]);
-
-  useEffect(() => {
-    setTime(baseTime);
-    setSelected("");
-    return () => {};
-  }, [question]);
-
-  useEffect(() => {
+    if (!storage.getItem("uuid")) history.push("/");
     setInterval(() => {
       if (!selected) {
         setTime((prevState) => prevState - 1);
@@ -60,6 +52,17 @@ function TriviaGame() {
     getQuestion();
     return () => {};
   }, []);
+
+  useEffect(() => {
+    if (time <= -2) gameOver();
+    return () => {};
+  }, [time]);
+
+  useEffect(() => {
+    setTime(baseTime);
+    setSelected("");
+    return () => {};
+  }, [question]);
 
   useEffect(() => {
     console.log(selected);
