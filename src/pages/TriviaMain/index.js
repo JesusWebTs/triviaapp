@@ -17,14 +17,14 @@ function TriviaMain() {
     history.push(`game/${name.toLowerCase()}`);
   };
 
-  useEffect(() => {
+  /* useEffect(() => {
     const invalidNames = ["", "undefined", "null"];
     const name = storage.getItem("name");
     if (!invalidNames.includes(name)) {
       goPlayGame(name);
     }
     return () => {};
-  }, []);
+  }, []); */
 
   return (
     <TriviaContainerStyled>

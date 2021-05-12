@@ -1,7 +1,9 @@
 import { useReducer } from "react";
 
+const storage = window.localStorage;
+
 const initialState = {
-  name: "",
+  name: storage.getItem("name") ? storage.getItem("name") : "",
 };
 
 const reducer = (state, action) => {

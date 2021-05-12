@@ -6,7 +6,8 @@ import { TriviaContainerStyled } from "../styles";
 //Hooks
 import usePlayers from "../../hooks/usePlayers";
 import { useState } from "react";
-import { useHistory, useLocation } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+const storage = window.localStorage;
 function ScoreGame() {
   const { getPlayersScores, players } = usePlayers();
   const [_, setPlayers] = useState([]);
@@ -21,7 +22,10 @@ function ScoreGame() {
   }, []);
   return (
     <TriviaContainerStyled>
-      <ScoreTable data={players} onClick={() => history.push("/")}></ScoreTable>
+      <ScoreTable
+        data={players}
+        onClick={() => history.push(`/game/${storage.getItem("name")}`)}
+      ></ScoreTable>
     </TriviaContainerStyled>
   );
 }
