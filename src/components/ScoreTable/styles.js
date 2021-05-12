@@ -16,13 +16,16 @@ export const ScoreItemStyled = styled.li`
   position: relative;
   padding: 15px;
   border: 2px solid white;
-  &:nth-child(5) {
+  position: relative;
+
+  ${({ own }) => {
+    if (own)
+      return `
     position: sticky;
     top: 0;
     bottom: 0;
-    z-index: 10;
-  }
-  position: relative;
+    `;
+  }}
 `;
 export const ScoreItemContainerStyled = styled.ol`
   overflow-y: scroll;
