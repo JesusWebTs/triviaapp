@@ -8,13 +8,13 @@ function App() {
     <div className="App">
       <Router>
         <Switch>
-          <Route exact path="/game/:name">
+          <Route path="/game/:name">
             <TriviaGame />
           </Route>
           <Route path="/score">
             <ScoreGame />
           </Route>
-          <Route path="/">
+          <Route exact path="/">
             <TriviaMain />
           </Route>
         </Switch>
