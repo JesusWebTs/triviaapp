@@ -20,7 +20,7 @@ function OptionCard({ children, onClick, correct, current, time }) {
             : ""
         }
         ${!correct && current === selected ? "answer-card--incorrect" : ""}
-        ${selected || time <= 0 ? "disabled" : ""}
+        ${selected || time <= 0 ? "disabled" : ""} 
         `}
       >
         <AnswerStyled>
