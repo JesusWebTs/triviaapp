@@ -1,10 +1,13 @@
-import React, { useState, useEffect, useLayoutEffect } from "react";
+import React, { useState, useEffect } from "react";
 //Components
-import TimeLine from "../../components/TimeLine";
-import OptionCard from "../../components/OptionCard";
-import QuestionCard from "../../components/QuestionCard";
-import TimeCounter from "../../components/TimeCounter";
-import Spiner from "../../components/Spiner";
+import {
+  TimeLine,
+  OptionCard,
+  QuestionCard,
+  TimeCounter,
+  Spiner,
+} from "../../components";
+
 //Styless
 import { TriviaContainerStyled } from "../styles";
 import {
@@ -18,92 +21,114 @@ import { useQuestion } from "../../hooks/useQuestion";
 //Context
 import contextSelected from "../../context/answerContext";
 import { useHistory } from "react-router-dom";
+import { useTime } from "../../hooks/useTime";
+import { useScore } from "../../hooks/useScore";
+import scoreContext from "../../context/scoreContext";
+import usePlayers from "../../hooks/usePlayers";
 
 const storage = window.localStorage;
+const transitionTime = 2000;
+const uuid = window.localStorage.getItem("uuid");
+const name = window.localStorage.getItem("name");
 function TriviaGame() {
+  const { updatePlayer } = usePlayers();
+  const { ScoreProvider } = scoreContext;
   const history = useHistory();
   let timeOut;
-  let baseTime = 10;
   const { SelectedAnswerProvider } = contextSelected;
   const [selected, setSelected] = useState("");
-  const [time, setTime] = useState(baseTime);
   const { getQuestion, answers, question, loading } = useQuestion();
+  const { baseTime, time, realoadInterval } = useTime({
+    updateTimeWhen: [question, selected],
+    baseTime: 10,
+    cb: () => gameOver(score),
+    isSelected: selected,
+  });
+  const { correctAnswer, score } = useScore();
+
   const optionSelected = (option) => {
     clearTimeout(timeOut);
     setSelected(option);
-    setTimeout(() => {
-      getQuestion();
-    }, 2000);
+    realoadInterval();
     return selected;
   };
 
-  const gameOver = () => {
-    history.push("/score");
+  const nextQuestion = () => {
+    setTimeout(
+      () =>
+        getQuestion().then(() => {
+          realoadInterval();
+        }),
+      transitionTime
+    );
   };
+
+  function gameOver(score) {
+    updatePlayer(uuid, { name, maxScore: score });
+    setTimeout(() => history.push("/score"), transitionTime);
+  }
 
   useEffect(() => {
     if (!storage.getItem("uuid")) history.push("/");
-    setInterval(() => {
-      if (!selected) {
-        setTime((prevState) => prevState - 1);
-      }
-    }, 1000);
     setSelected("");
     getQuestion();
     return () => {};
   }, []);
 
   useEffect(() => {
-    if (time <= -2) gameOver();
-    return () => {};
-  }, [time]);
-
-  useEffect(() => {
-    setTime(baseTime);
     setSelected("");
     return () => {};
   }, [question]);
 
   useEffect(() => {
-    console.log(selected);
+    console.log(score);
     return () => {};
-  }, [selected]);
+  }, [score]);
 
   return (
-    <TriviaContainerStyled>
-      {loading ? (
-        <Spiner />
-      ) : (
-        <>
-          <SelectedAnswerProvider value={selected}>
-            <ScoreVarTimeContainerStyled>
-              <TimeLine time={baseTime}></TimeLine>
-            </ScoreVarTimeContainerStyled>
-            <TimeCounterContainerStyled>
-              <TimeCounter time={baseTime}></TimeCounter>
-            </TimeCounterContainerStyled>
-            <QuestionConttainerStyled>
-              <QuestionCard>{question}</QuestionCard>
-            </QuestionConttainerStyled>
-            <AnswerContainerStyled>
-              {answers.map(({ correct, answer, option }) => (
-                <OptionCard
-                  key={option}
-                  correct={correct}
-                  current={option}
-                  onClick={() => {
-                    if (!correct) setTimeout(() => gameOver(), 2000);
-                    optionSelected(option);
-                  }}
-                >
-                  {answer}
-                </OptionCard>
-              ))}
-            </AnswerContainerStyled>
-          </SelectedAnswerProvider>
-        </>
-      )}
-    </TriviaContainerStyled>
+    <ScoreProvider value={score}>
+      <TriviaContainerStyled>
+        {loading ? (
+          <Spiner />
+        ) : (
+          <>
+            <SelectedAnswerProvider value={selected}>
+              <ScoreVarTimeContainerStyled>
+                <TimeLine time={baseTime}></TimeLine>
+              </ScoreVarTimeContainerStyled>
+              <TimeCounterContainerStyled>
+                <TimeCounter time={baseTime}></TimeCounter>
+              </TimeCounterContainerStyled>
+              <QuestionConttainerStyled>
+                <QuestionCard>{question}</QuestionCard>
+              </QuestionConttainerStyled>
+              <h2>Score: {score}</h2>
+              <AnswerContainerStyled>
+                {answers.map(({ correct, answer, option }) => (
+                  <OptionCard
+                    key={option}
+                    time={time}
+                    correct={correct}
+                    current={option}
+                    selected={selected}
+                    onClick={() => {
+                      optionSelected(option);
+                      if (!correct) gameOver(score);
+                      else {
+                        correctAnswer({ time, baseTime });
+                        nextQuestion();
+                      }
+                    }}
+                  >
+                    {answer}
+                  </OptionCard>
+                ))}
+              </AnswerContainerStyled>
+            </SelectedAnswerProvider>
+          </>
+        )}
+      </TriviaContainerStyled>
+    </ScoreProvider>
   );
 }
 

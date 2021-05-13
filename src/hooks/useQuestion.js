@@ -17,10 +17,6 @@ export const useQuestion = () => {
     console.log(answers);
     return () => {};
   }, [answers]);
-  useEffect(() => {
-    console.log(question);
-    return () => {};
-  }, [question]);
 
   const getQuestion = async () => {
     setLoading(true);

@@ -24,6 +24,7 @@ export const ScoreItemStyled = styled.li`
     position: sticky;
     top: 0;
     bottom: 0;
+    z-index: 30;
     `;
   }}
 `;
@@ -38,7 +39,7 @@ export const Top3Styled = styled.img`
   left: 0;
   top: 0;
   bottom: 0;
-  margin: auto 15px;
+  margin: auto;
   width: 50px;
 `;
 

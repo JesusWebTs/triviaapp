@@ -3,7 +3,7 @@ import "./styles.css";
 import { CardContainer, AnswerContainerStyled, AnswerStyled } from "./styles";
 
 import SelectedContext from "../../context/answerContext";
-function OptionCard({ children, onClick, correct, current }) {
+function OptionCard({ children, onClick, correct, current, time }) {
   const { SelectedAnswerContext } = SelectedContext;
   const selected = useContext(SelectedAnswerContext);
 
@@ -20,6 +20,7 @@ function OptionCard({ children, onClick, correct, current }) {
             : ""
         }
         ${!correct && current === selected ? "answer-card--incorrect" : ""}
+        ${selected || time <= 0 ? "disabled" : ""}
         `}
       >
         <AnswerStyled>

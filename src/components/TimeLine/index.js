@@ -17,9 +17,9 @@ function TimeLine({ time }) {
   }, [selected]);
   return (
     <ScoreVarTimeStyled time={time} selected={selected}>
-      <StarScoreStyled left={28} src={Star1} />
-      <StarScoreStyled left={61} src={Star2} />
-      <StarScoreStyled left={95} src={Star3} />
+      <StarScoreStyled left={30} src={Star1} />
+      <StarScoreStyled left={63} src={Star2} />
+      <StarScoreStyled left={97} src={Star3} />
     </ScoreVarTimeStyled>
   );
 }
