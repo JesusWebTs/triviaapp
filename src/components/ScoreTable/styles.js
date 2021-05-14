@@ -32,6 +32,44 @@ export const ScoreItemContainerStyled = styled.ol`
   overflow-y: scroll;
   max-height: 90%;
   text-align: center;
+  .contenedor {
+    margin: 2rem auto;
+    border: 1px solid #aaa;
+    height: 300px;
+    width: 90%;
+    max-width: 400px;
+    background: #f1f2f3;
+    overflow: auto;
+    box-sizing: border-box;
+    padding: 0 1rem;
+  }
+
+  &::-webkit-scrollbar {
+    -webkit-appearance: none;
+  }
+
+  &::-webkit-scrollbar:vertical {
+    width: 10px;
+  }
+
+  &::-webkit-scrollbar-button:increment,
+  &::-webkit-scrollbar-button {
+    display: none;
+  }
+
+  &::-webkit-scrollbar:horizontal {
+    height: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #797979;
+    border-radius: 20px;
+    border: 2px solid #f1f2f3;
+  }
+
+  &::-webkit-scrollbar-track {
+    border-radius: 10px;
+  }
 `;
 
 export const Top3Styled = styled.img`

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import ApiConnect from "../services/apiFirebase";
-import PlayerScore from "../DTO/playerScore";
+
 const usePlayers = () => {
   const [player, setPlayer] = useState({});
   const [players, setPlayers] = useState([]);
@@ -22,12 +22,13 @@ const usePlayers = () => {
     return ApiConnect.getOne(uuid)
       .then((player) => {
         setPlayer(player);
+        return player[0];
       })
       .catch((err) => {
         console.log(err);
       });
   };
-  const updatePlayer = (uuid, data) => {
+  const updatePlayer = async (uuid, data) => {
     return ApiConnect.update(uuid, data)
       .then((writeResult) => {
         setPlayer((prevState) => ({ ...prevState, ...data }));
@@ -35,6 +36,13 @@ const usePlayers = () => {
       .catch((err) => {
         console.log(err);
       });
+  };
+  const updatePlayerScore = (uuid, data) => {
+    getPlayerInfo(uuid).then((_data) => {
+      if (data.maxScore > _data.maxScore) {
+        updatePlayer(uuid, data);
+      }
+    });
   };
   const getPlayersScores = async () => {
     return ApiConnect.getAll()
@@ -51,6 +59,7 @@ const usePlayers = () => {
     getPlayerInfo,
     getPlayersScores,
     updatePlayer,
+    updatePlayerScore,
     player,
     players,
   };

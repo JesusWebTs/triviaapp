@@ -1,7 +1,6 @@
 import React from "react";
 import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import "./App.css";
-import scoreContext from "./context/scoreContext";
 import { TriviaGame, ScoreGame, TriviaMain } from "./pages";
 
 function App() {

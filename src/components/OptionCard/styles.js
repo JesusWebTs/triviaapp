@@ -9,6 +9,7 @@ export const CardContainer = styled.div`
   justify-content: center;
   align-items: center;
   padding: 10px;
+  background-color: black;  
   &::after,
   &::before {
     content: "";
@@ -35,6 +36,7 @@ export const AnswerContainerStyled = styled.button`
   height: 100%;
   border-radius: 40px;
   transition: background-color 0.2s linear;
+  font-weight: bold;
   &:hover {
     background-color: #0000ff33;
   }

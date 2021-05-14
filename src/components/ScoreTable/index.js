@@ -21,7 +21,6 @@ function ScoreTable({ data, onClick }) {
   const [players, setPlayers] = useState([]);
 
   useEffect(() => {
-    console.log(storage.getItem("uuid"));
     const _players = ascendentSort(data);
     setPlayers(_players);
     return () => {};
@@ -35,13 +34,13 @@ function ScoreTable({ data, onClick }) {
           {players.map((player, index) => (
             <ScoreItemStyled
               key={player.uuid}
-              own={player.uuid == storage.getItem("uuid") ? true : false}
+              own={player.uuid === storage.getItem("uuid") ? true : false}
             >
               {index === 0 ? <Top3Styled src={Star3} /> : null}
               {index === 1 ? <Top3Styled src={Star2} /> : null}
               {index === 2 ? <Top3Styled src={Star1} /> : null}
               <h2>{player.name}</h2>
-              <h3>Score: {player.maxScore}</h3>
+              <h3>Max Score: {player.maxScore}</h3>
             </ScoreItemStyled>
           ))}
         </ScoreItemContainerStyled>

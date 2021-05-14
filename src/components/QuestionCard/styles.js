@@ -14,6 +14,7 @@ export const CardContainer = styled.div`
   text-align: center;
   border-radius: 100px;
   width: 70%;
+  background-color: black;
   &::after,
   &::before {
     content: "";
@@ -34,7 +35,7 @@ export const QuestionContainerStyled = styled.div`
   background-color: white;
   width: 100%;
   height: 100%;
-  border-radius: 40px;
+  border-radius: 100px;
   padding-left: 15px;
   padding-right: 15px;
 `;
@@ -42,4 +43,6 @@ export const QuestionStyled = styled.p`
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 20px;
+  font-weight: 700;
 `;

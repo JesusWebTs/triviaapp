@@ -23,16 +23,15 @@ import contextSelected from "../../context/answerContext";
 import { useHistory } from "react-router-dom";
 import { useTime } from "../../hooks/useTime";
 import { useScore } from "../../hooks/useScore";
-import scoreContext from "../../context/scoreContext";
-import usePlayers from "../../hooks/usePlayers";
 
+import usePlayers from "../../hooks/usePlayers";
 const storage = window.localStorage;
 const transitionTime = 2000;
 const uuid = window.localStorage.getItem("uuid");
 const name = window.localStorage.getItem("name");
 function TriviaGame() {
-  const { updatePlayer } = usePlayers();
-  const { ScoreProvider } = scoreContext;
+  const { updatePlayerScore } = usePlayers();
+
   const history = useHistory();
   let timeOut;
   const { SelectedAnswerProvider } = contextSelected;
@@ -64,7 +63,7 @@ function TriviaGame() {
   };
 
   function gameOver(score) {
-    updatePlayer(uuid, { name, maxScore: score });
+    updatePlayerScore(uuid, { name, maxScore: score });
     setTimeout(() => history.push("/score"), transitionTime);
   }
 
@@ -78,57 +77,50 @@ function TriviaGame() {
   useEffect(() => {
     setSelected("");
     return () => {};
-  }, [question]);
-
-  useEffect(() => {
-    console.log(score);
-    return () => {};
-  }, [score]);
+  }, [answers]);
 
   return (
-    <ScoreProvider value={score}>
-      <TriviaContainerStyled>
-        {loading ? (
-          <Spiner />
-        ) : (
-          <>
-            <SelectedAnswerProvider value={selected}>
-              <ScoreVarTimeContainerStyled>
-                <TimeLine time={baseTime}></TimeLine>
-              </ScoreVarTimeContainerStyled>
-              <TimeCounterContainerStyled>
-                <TimeCounter time={baseTime}></TimeCounter>
-              </TimeCounterContainerStyled>
-              <QuestionConttainerStyled>
-                <QuestionCard>{question}</QuestionCard>
-              </QuestionConttainerStyled>
-              <h2>Score: {score}</h2>
-              <AnswerContainerStyled>
-                {answers.map(({ correct, answer, option }) => (
-                  <OptionCard
-                    key={option}
-                    time={time}
-                    correct={correct}
-                    current={option}
-                    selected={selected}
-                    onClick={() => {
-                      optionSelected(option);
-                      if (!correct) gameOver(score);
-                      else {
-                        correctAnswer({ time, baseTime });
-                        nextQuestion();
-                      }
-                    }}
-                  >
-                    {answer}
-                  </OptionCard>
-                ))}
-              </AnswerContainerStyled>
-            </SelectedAnswerProvider>
-          </>
-        )}
-      </TriviaContainerStyled>
-    </ScoreProvider>
+    <TriviaContainerStyled>
+      {loading ? (
+        <Spiner />
+      ) : (
+        <>
+          <SelectedAnswerProvider value={selected}>
+            <ScoreVarTimeContainerStyled>
+              <TimeLine time={baseTime}></TimeLine>
+            </ScoreVarTimeContainerStyled>
+            <TimeCounterContainerStyled>
+              <TimeCounter time={baseTime}></TimeCounter>
+            </TimeCounterContainerStyled>
+            <QuestionConttainerStyled>
+              <QuestionCard>{question}</QuestionCard>
+            </QuestionConttainerStyled>
+            <h2>Score: {score}</h2>
+            <AnswerContainerStyled>
+              {answers.map(({ correct, answer, option }) => (
+                <OptionCard
+                  key={option}
+                  time={time}
+                  correct={correct}
+                  current={option}
+                  selected={selected}
+                  onClick={() => {
+                    optionSelected(option);
+                    if (!correct) gameOver(score);
+                    else {
+                      correctAnswer({ time, baseTime });
+                      nextQuestion();
+                    }
+                  }}
+                >
+                  {answer}
+                </OptionCard>
+              ))}
+            </AnswerContainerStyled>
+          </SelectedAnswerProvider>
+        </>
+      )}
+    </TriviaContainerStyled>
   );
 }
 

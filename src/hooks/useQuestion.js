@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { sortRandomAnswerArray, textFormatter } from "../helpers";
 
 //Services
@@ -12,11 +12,6 @@ export const useQuestion = () => {
   const [question, setQuestion] = useState("");
   const [answers, setAnswers] = useState([]);
   const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    console.log(answers);
-    return () => {};
-  }, [answers]);
 
   const getQuestion = async () => {
     setLoading(true);

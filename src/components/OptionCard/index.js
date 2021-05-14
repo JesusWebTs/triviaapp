@@ -25,7 +25,7 @@ function OptionCard({ children, onClick, correct, current, time }) {
       >
         <AnswerStyled>
           <span style={{ fontWeight: "bold" }}>{current}:</span>
-          {children}
+          {children} {correct ? "correcta" : ""}
         </AnswerStyled>
       </AnswerContainerStyled>
     </CardContainer>
