@@ -14,12 +14,13 @@ import Star3 from "../../assets/images/star3.svg";
 //Helpers
 import { ascendentSort } from "../../helpers";
 import { useState } from "react";
+import { useHistory } from "react-router";
 
 const storage = window.localStorage;
 
 function ScoreTable({ data, onClick }) {
   const [players, setPlayers] = useState([]);
-
+  const history = useHistory();
   useEffect(() => {
     const _players = ascendentSort(data);
     setPlayers(_players);
@@ -45,6 +46,15 @@ function ScoreTable({ data, onClick }) {
           ))}
         </ScoreItemContainerStyled>
         <PlayAgain onClick={onClick}>Play Again</PlayAgain>
+        <PlayAgain
+          onClick={() => {
+            window.localStorage.removeItem("uuid");
+            window.localStorage.removeItem("name");
+            history.push("/");
+          }}
+        >
+          Log Out
+        </PlayAgain>
       </ScoreTableStyled>
     </>
   );

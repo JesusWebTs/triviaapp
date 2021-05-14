@@ -17,12 +17,19 @@ function TriviaMain() {
     history.push(`game/${name.toLowerCase()}`);
   };
 
+  useEffect(() => {
+    return () => {};
+  }, []);
+
   return (
     <TriviaContainerStyled>
       <InputForm
-        onClick={(name) => {          
+        onClick={(name) => {
           storage.setItem("name", name);
-          if (!storage.getItem("uuid")) {
+          if (
+            !storage.getItem("uuid") ||
+            storage.getItem("uuid") === "undefined"
+          ) {
             storage.setItem("uuid", uuid());
             createPlayer({
               name: storage.getItem("name"),
