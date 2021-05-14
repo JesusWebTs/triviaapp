@@ -6,6 +6,7 @@ import {
   ScoreTableStyled,
   Top3Styled,
   PlayAgain,
+  ButtonContainerStyled
 } from "./styles";
 //Assets
 import Star1 from "../../assets/images/star1.svg";
@@ -45,16 +46,18 @@ function ScoreTable({ data, onClick }) {
             </ScoreItemStyled>
           ))}
         </ScoreItemContainerStyled>
-        <PlayAgain onClick={onClick}>Play Again</PlayAgain>
-        <PlayAgain
-          onClick={() => {
-            window.localStorage.removeItem("uuid");
-            window.localStorage.removeItem("name");
-            history.push("/");
-          }}
-        >
-          Log Out
-        </PlayAgain>
+        <ButtonContainerStyled>
+          <PlayAgain onClick={onClick}>Play Again</PlayAgain>
+          <PlayAgain
+            onClick={() => {
+              window.localStorage.removeItem("uuid");
+              window.localStorage.removeItem("name");
+              history.push("/");
+            }}
+          >
+            Log Out
+          </PlayAgain>
+        </ButtonContainerStyled>
       </ScoreTableStyled>
     </>
   );

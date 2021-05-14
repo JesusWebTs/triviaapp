@@ -82,11 +82,6 @@ export const Top3Styled = styled.img`
 `;
 
 export const PlayAgain = styled.button`
-  position: absolute;
-  top: 0;
-  right: 0;
-  margin: 30px;
-  margin-top: 25px;
   width: 140px;
   height: 50px;
   border-radius: 5px;
@@ -95,4 +90,13 @@ export const PlayAgain = styled.button`
   font-size: 20px;
   cursor: pointer;
   z-index: 30;
+`;
+export const ButtonContainerStyled = styled.div`
+  position: absolute;
+  display: flex;
+  top: 0;
+  right: 0;
+  gap: 5px;
+  margin: 30px;
+  margin-top: 25px;
 `;
