@@ -38,7 +38,8 @@ export const AnswerContainerStyled = styled.button`
   transition: background-color 0.2s linear;
   font-weight: bold;
   &:hover {
-    background-color: #0000ff33;
+    background-color: black;
+    color: white;
   }
 `;
 export const AnswerStyled = styled.p`

@@ -28,8 +28,8 @@ import usePlayers from "../../hooks/usePlayers";
 const storage = window.localStorage;
 const transitionTime = 2000;
 const uuid = window.localStorage.getItem("uuid");
-const name = window.localStorage.getItem("name");
 function TriviaGame() {
+  const name = window.localStorage.getItem("name");
   const { updatePlayerScore } = usePlayers();
 
   const history = useHistory();

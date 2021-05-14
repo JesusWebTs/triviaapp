@@ -8,6 +8,7 @@ export const ScoreVarTimeStyled = styled.div`
   border-radius: 20px;
   border: 2px solid black;
   scroll-behavior: none;
+  padding: 0;
   &:before {
     border-radius: 20px;
     content: "";

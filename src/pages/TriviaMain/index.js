@@ -20,7 +20,7 @@ function TriviaMain() {
   return (
     <TriviaContainerStyled>
       <InputForm
-        onClick={(name) => {
+        onClick={(name) => {          
           storage.setItem("name", name);
           if (!storage.getItem("uuid")) {
             storage.setItem("uuid", uuid());

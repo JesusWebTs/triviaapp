@@ -38,9 +38,12 @@ const usePlayers = () => {
       });
   };
   const updatePlayerScore = (uuid, data) => {
+    console.log(data);
     getPlayerInfo(uuid).then((_data) => {
       if (data.maxScore > _data.maxScore) {
         updatePlayer(uuid, data);
+      } else {
+        updatePlayer(uuid, { name: data.name });
       }
     });
   };
