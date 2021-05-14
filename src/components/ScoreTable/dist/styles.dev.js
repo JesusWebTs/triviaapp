@@ -10,7 +10,7 @@ var _styledComponents = _interopRequireDefault(require("styled-components"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _templateObject6() {
-  var data = _taggedTemplateLiteral(["\n  position: absolute;\n  display: flex;\n  top: 0;\n  right: 0;\n  gap: 5px;\n  margin: 30px;\n  margin-top: 25px;\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: flex-end;\n  gap: 5px;\n  margin: 30px;\n  margin-top: 25px;\n"]);
 
   _templateObject6 = function _templateObject6() {
     return data;
@@ -40,7 +40,7 @@ function _templateObject4() {
 }
 
 function _templateObject3() {
-  var data = _taggedTemplateLiteral(["\n  overflow-y: scroll;\n  max-height: 90%;\n  text-align: center;\n  .contenedor {\n    margin: 2rem auto;\n    border: 1px solid #aaa;\n    height: 300px;\n    width: 90%;\n    max-width: 400px;\n    background: #f1f2f3;\n    overflow: auto;\n    box-sizing: border-box;\n    padding: 0 1rem;\n  }\n\n  &::-webkit-scrollbar {\n    -webkit-appearance: none;\n  }\n\n  &::-webkit-scrollbar:vertical {\n    width: 10px;\n  }\n\n  &::-webkit-scrollbar-button:increment,\n  &::-webkit-scrollbar-button {\n    display: none;\n  }\n\n  &::-webkit-scrollbar:horizontal {\n    height: 10px;\n  }\n\n  &::-webkit-scrollbar-thumb {\n    background-color: #797979;\n    border-radius: 20px;\n    border: 2px solid #f1f2f3;\n  }\n\n  &::-webkit-scrollbar-track {\n    border-radius: 10px;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  overflow-y: scroll;\n  max-height: 90%;\n  text-align: center;\n  padding: 0;\n\n  &::-webkit-scrollbar {\n    -webkit-appearance: none;\n  }\n\n  &::-webkit-scrollbar:vertical {\n    width: 10px;\n  }\n\n  &::-webkit-scrollbar-button:increment,\n  &::-webkit-scrollbar-button {\n    display: none;\n  }\n\n  &::-webkit-scrollbar:horizontal {\n    height: 10px;\n  }\n\n  &::-webkit-scrollbar-thumb {\n    background-color: #797979;\n    border-radius: 20px;\n    border: 2px solid #f1f2f3;\n  }\n\n  &::-webkit-scrollbar-track {\n    border-radius: 10px;\n  }\n"]);
 
   _templateObject3 = function _templateObject3() {
     return data;
@@ -50,7 +50,7 @@ function _templateObject3() {
 }
 
 function _templateObject2() {
-  var data = _taggedTemplateLiteral(["\n  width: 80%;\n  background: black;\n  color: white;\n  margin: 20px;\n  border-radius: 10px;\n  text-align: center;\n  list-style: inside decimal;\n  position: relative;\n  padding: 15px;\n  border: 2px solid white;\n  position: relative;\n\n  ", "\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: block;\n  width: 80%;\n  background: black;\n  color: white;\n  margin: auto;\n  border-radius: 10px;\n  text-align: center;\n  list-style: inside decimal;\n  position: relative;\n  padding: 15px;\n  border: 2px solid white;\n  position: relative;\n\n  ", "\n"]);
 
   _templateObject2 = function _templateObject2() {
     return data;

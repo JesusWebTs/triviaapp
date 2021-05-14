@@ -6,10 +6,11 @@ export const ScoreTableStyled = styled.div`
   padding: 20px;
 `;
 export const ScoreItemStyled = styled.li`
+  display: block;
   width: 80%;
   background: black;
   color: white;
-  margin: 20px;
+  margin: auto;
   border-radius: 10px;
   text-align: center;
   list-style: inside decimal;
@@ -32,17 +33,7 @@ export const ScoreItemContainerStyled = styled.ol`
   overflow-y: scroll;
   max-height: 90%;
   text-align: center;
-  .contenedor {
-    margin: 2rem auto;
-    border: 1px solid #aaa;
-    height: 300px;
-    width: 90%;
-    max-width: 400px;
-    background: #f1f2f3;
-    overflow: auto;
-    box-sizing: border-box;
-    padding: 0 1rem;
-  }
+  padding: 0;
 
   &::-webkit-scrollbar {
     -webkit-appearance: none;
@@ -92,10 +83,8 @@ export const PlayAgain = styled.button`
   z-index: 30;
 `;
 export const ButtonContainerStyled = styled.div`
-  position: absolute;
   display: flex;
-  top: 0;
-  right: 0;
+  justify-content: flex-end;
   gap: 5px;
   margin: 30px;
   margin-top: 25px;

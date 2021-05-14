@@ -6,7 +6,7 @@ import {
   ScoreTableStyled,
   Top3Styled,
   PlayAgain,
-  ButtonContainerStyled
+  ButtonContainerStyled,
 } from "./styles";
 //Assets
 import Star1 from "../../assets/images/star1.svg";
@@ -31,6 +31,18 @@ function ScoreTable({ data, onClick }) {
   return (
     <>
       <ScoreTableStyled>
+        <ButtonContainerStyled>
+          <PlayAgain onClick={onClick}>Play Again</PlayAgain>
+          <PlayAgain
+            onClick={() => {
+              window.localStorage.removeItem("uuid");
+              window.localStorage.removeItem("name");
+              history.push("/");
+            }}
+          >
+            Log Out
+          </PlayAgain>
+        </ButtonContainerStyled>
         <h1>Scores</h1>
         <ScoreItemContainerStyled>
           {players.map((player, index) => (
@@ -46,18 +58,6 @@ function ScoreTable({ data, onClick }) {
             </ScoreItemStyled>
           ))}
         </ScoreItemContainerStyled>
-        <ButtonContainerStyled>
-          <PlayAgain onClick={onClick}>Play Again</PlayAgain>
-          <PlayAgain
-            onClick={() => {
-              window.localStorage.removeItem("uuid");
-              window.localStorage.removeItem("name");
-              history.push("/");
-            }}
-          >
-            Log Out
-          </PlayAgain>
-        </ButtonContainerStyled>
       </ScoreTableStyled>
     </>
   );
