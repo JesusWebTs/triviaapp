@@ -39,7 +39,7 @@ function TriviaGame() {
   const { getQuestion, answers, question, loading } = useQuestion();
   const { baseTime, time, realoadInterval } = useTime({
     updateTimeWhen: [question, selected],
-    baseTime: 10,
+    baseTime: 20,
     cb: () => gameOver(score),
     isSelected: selected,
   });
