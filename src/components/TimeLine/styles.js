@@ -25,12 +25,6 @@ export const ScoreVarTimeStyled = styled.div`
       rgba(218, 222, 32, 1) 66%,
       rgba(30, 207, 14, 1) 100%
     );
-    /* clip-path: polygon(
-      0 0,
-      ${() => `${50}%`} 0,
-      ${() => `${50}%`} 100%,
-      0% 100%
-    ); */
 
     animation-duration: ${({ time }) => `${time}s`};
     animation-name: TimeLine;
@@ -52,8 +46,8 @@ export const ScoreVarTimeStyled = styled.div`
 export const StarScoreStyled = styled.img`
   position: absolute;
   transform: translatey(-50%);
-  bottom: 0;
+  top: 0;
   left: ${({ left }) => `${left}%`};
   margin: auto;
-  height: 105%;
+  height: 30px;
 `;

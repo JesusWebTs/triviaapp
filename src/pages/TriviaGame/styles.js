@@ -6,6 +6,8 @@ export const ScoreVarTimeContainerStyled = styled.div`
   top: 20px;
   padding: 15px;
   background-color: white;
+  flex-basis: 70px;
+  flex-shrink: 0;
 `;
 
 export const QuestionConttainerStyled = styled.div`

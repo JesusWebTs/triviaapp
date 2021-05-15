@@ -17,9 +17,6 @@ function TriviaMain() {
     history.push(`game/${name.toLowerCase()}`);
   };
 
-  useEffect(() => {
-    return () => {};
-  }, []);
 
   return (
     <TriviaContainerStyled>
